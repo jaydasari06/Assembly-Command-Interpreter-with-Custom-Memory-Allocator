@@ -139,7 +139,6 @@ static bool is_base(Token token) {
  * @return True if the current token was parsed as a base, false otherwise.
  */
 static bool parse_base(Parser *parser, Operand *op) {
-    // STUDENT TODO: Parse the current token as a base
     if (is_base(parser->current)) {
         op->base = parser->current.lexeme[0];
         return true;
@@ -208,7 +207,6 @@ static bool parse_number(Token token, int64_t *result) {
  * false otherwise.
  */
 static bool parse_im(Parser *parser, Operand *op) {
-    // STUDENT TODO: Parse current token as an immediate
     if (parser->current.type == TOK_NUM) {
         return parse_number(parser->current, &op->num_val);
     }
@@ -226,7 +224,6 @@ static bool parse_im(Parser *parser, Operand *op) {
  * @return True if this was parsed as a variable, false otherwise.
  */
 static bool parse_variable_operand(Parser *parser, Operand *op) {
-    // STUDENT TODO: Parse the current token as a variable
     if (parser->current.type == TOK_IDENT && is_variable(parser->current)) {
         return parse_variable(parser->current, &op->num_val);
     }
@@ -248,7 +245,6 @@ static bool parse_variable_operand(Parser *parser, Operand *op) {
  * otherwise.
  */
 static bool parse_var_or_imm(Parser *parser, Operand *op, bool *is_immediate) {
-    // STUDENT TODO: Parse the current token as a variable or an immediate
     if (parse_im(parser, op)) {
         *is_immediate = true;
         return true;
@@ -309,7 +305,6 @@ static void error_occured(Parser *parser, Command *cmd) {
  * returned command.
  */
 static Command *parse_cmd(Parser *parser) {
-    // STUDENT TODO: Parse an individual command by looking at the current token's type
     // TODO: Skip newlines before anything else
     skip_nls(parser);
     // You will need to modify this later
@@ -352,7 +347,6 @@ static Command *parse_cmd(Parser *parser) {
 
     Command *cmd = NULL;
     switch (token.type) {
-        // STUDENT TODO: Add cases handling different commands
         case TOK_MOV:
             cmd = create_command(CMD_MOV);
             advance(parser);
@@ -847,7 +841,6 @@ static Command *parse_cmd(Parser *parser) {
 }
 
 Command *parse_commands(Parser *parser) {
-    // STUDENT TODO: Create a linked list of commands using parse_cmd as described in the handout
     // Change this!
     Command *head     = parse_cmd(parser);
     Command *headCopy = head;

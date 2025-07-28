@@ -4,7 +4,6 @@
 #include <stdlib.h>
 
 void free_command(Command *command) {
-    // STUDENT TODO: Free the command and all its children
     while (command != NULL) {
         Command *tempNext = command->next;
         if (command->is_b_string) {

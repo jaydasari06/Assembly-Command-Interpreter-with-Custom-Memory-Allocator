@@ -10,7 +10,6 @@ static unsigned long hash_function(char *s);
 static Entry        *entry_init(char *id, Command *command);
 
 bool label_map_init(LabelMap *map, int capacity) {
-    // STUDENT TODO: Initialize the fields of the label map
     map->entries = malloc(capacity * sizeof(Entry *));
     memset(map -> entries, 0, capacity * sizeof(Entry *));
     if (map != NULL) {
@@ -26,7 +25,6 @@ bool label_map_init(LabelMap *map, int capacity) {
  * @param e The pointer to the entry to free.
  */
 static void free_entry(Entry *e) {
-    // STUDENT TODO: Free a *singular* entry
     // Do not free children; see below
     free(e->id);
     free(e);
@@ -38,7 +36,6 @@ static void free_entry(Entry *e) {
  * @param e A pointer to the first entry to free.
  */
 static void free_entries(Entry *e) {
-    // STUDENT TODO: Free an entry and its children
     while (e != NULL) {
         Entry *temp = e->next;
         free_entry(e);
@@ -47,7 +44,6 @@ static void free_entries(Entry *e) {
 }
 
 void label_map_free(LabelMap *map) {
-    // STUDENT TODO: Free the entries associated with this hashmap
     // Do not free the pointer itself, as you do not know whether it was allocated on the heap
     if (map != NULL) {
         for (int i = 0; i < map->capacity; i++) {
@@ -82,7 +78,6 @@ static unsigned long hash_function(char *s) {
  * @return True if the entry was initialized successfully, false otherwise.
  */
 static Entry *entry_init(char *id, Command *command) {
-    // STUDENT TODO: Initialize the entry and its fields
     Entry *ent = malloc(sizeof(Entry));
     if (ent != NULL) {
         ent->id = malloc(sizeof(char) * (strlen(id) + 1));
@@ -97,7 +92,6 @@ static Entry *entry_init(char *id, Command *command) {
 }
 
 bool put_label(LabelMap *map, char *id, Command *command) {
-    // STUDENT TODO: Put the given command into the bucket associated with this label
     // It is okay for the command to be null
     if (id == NULL || map == NULL) {
         return false;
@@ -123,7 +117,6 @@ bool put_label(LabelMap *map, char *id, Command *command) {
 }
 
 Entry *get_label(LabelMap *map, char *id) {
-    // STUDENT TODO: Retrieve the value associated with this label
     unsigned long num = hash_function(id) % (map->capacity);
     Entry        *ent = map->entries[num];
     while (ent != NULL) {

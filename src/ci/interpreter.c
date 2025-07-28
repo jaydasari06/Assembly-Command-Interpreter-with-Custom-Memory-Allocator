@@ -37,7 +37,6 @@ void interpret(Interpreter *intr, Command *commands) {
     Command *current = commands;
     while (current && !intr->had_error) {
         switch (current->type) {
-            // STUDENT TODO: process the commands and take actions as appropriate
             case CMD_MOV:
                 intr -> variables[current -> destination.num_val] = fetch_number_value(intr, &current -> val_a, true);
                 current = current->next;
@@ -256,7 +255,6 @@ void print_interpreter_state(Interpreter *intr) {
  * @return The fetched value.
  */
 static int64_t fetch_number_value(Interpreter *intr, Operand *op, bool is_im) {
-    // STUDENT TODO: Fetch either a variable from the interpreter's state or directly output a value
     if (is_im) {
         return op -> num_val;
     } else {
@@ -273,7 +271,6 @@ static int64_t fetch_number_value(Interpreter *intr, Operand *op, bool is_im) {
  * @return True if the given condition holds, false otherwise.
  */
 static bool cond_holds(Interpreter *intr, BranchCondition cond) {
-    // STUDENT TODO: Determine whether a given condition holds using the interpreter's state
     if (cond == BRANCH_ALWAYS) {
         return true;
     } else if (cond == BRANCH_EQUAL) {
@@ -312,7 +309,6 @@ static bool cond_holds(Interpreter *intr, BranchCondition cond) {
  * @return True whether the print was successful, false otherwise.
  */
 static bool print_base(Interpreter *intr, Command *cmd) {
-    // STUDENT TODO: Print the given value respecting the appropriate base
     int64_t varOrImm;
     if (cmd -> is_a_immediate) {
         varOrImm = cmd -> val_a.num_val;
